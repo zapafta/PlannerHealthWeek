@@ -1,122 +1,322 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using PlannerHealthWeek.ModelViewModel;
+@using PlannerHealthWeek.Data.Enum
+@model HomeViewModel
+
 @{
     Random rnd = new Random();
 
 }
 
 @{
-    
-    
+
+
 
     <ejs-button id="btnNovoPlano" content="➕ Criar novo plano"></ejs-button>
-    <ejs-button id="btnGenerateList" content="🛒 Gerar Lista de compras" ></ejs-button>
-    <ejs-button id="btnImprimir" content="📄 Imprimir" ></ejs-button>
+    <ejs-button id="btnGenerateList" content="🛒 Gerar Lista de compras"></ejs-button>
+    <ejs-button id="btnImprimir" content="📄 Imprimir"></ejs-button>
 
     <ejs-daterangepicker width="300" id="daterangepickerFor" name="value" startDate="@DateTime.Now" endDate="DateTime.Now.AddDays(7)"></ejs-daterangepicker>
-
     <table style="width: 100%;" border="4">
-        <tbody>
-            <tr>
-                <td>-</td>
-                <td class="headertable">Domingo</td>
-                <td class="headertable">Segunda</td>
-                <td class="headertable">Terça</td>
-                <td class="headertable">Quarta</td>
-                <td class="headertable">Quinta</td>
-                <td class="headertable">Sexta</td>
-                <td class="headertable">Sábado</td>
 
-            </tr>
-            <tr>
-                    <td class="headertable center"><h1>☕️</h1>Peq Almoco</td>
-                <td>DEMOS</td>
-                <td>DEMOS</td>
-                <td>DEMOS</td>
-                <td>DEMOS</td>
-                <td>DEMOS</td>
-                <td>DEMOS</td>
-                <td>DEMOS</td>
-            </tr>
-            <tr>
-                <td class="headertable center"><h1>🍞</h1>Lanche</td>
-                <td>DEMO LANCHE</td>
-                <td>DEMO LANCHE</td>
-                <td>DEMO LANCHE</td>
-                <td>DEMO LANCHE</td>
-                <td>DEMO LANCHE</td>
-                <td>DEMO LANCHE</td>
-                <td>DEMO LANCHE</td>
-            </tr>
-            <tr>
-                <td class="headertable center"> <h1>🥩</h1>Almoço</td>
-                <td>DEMO ALMOCO</td>
-                <td>DEMO ALMOCO</td>
-                <td>DEMO ALMOCO</td>
-                <td>DEMO ALMOCO</td>
-                <td>DEMO ALMOCO</td>
-                <td>DEMO ALMOCO</td>
-                <td>DEMO ALMOCO</td>
-            </tr>
-            <tr>
-                <td class="headertable center"><h1>🍏</h1>Lanche tarde</td>
-                <td>Demo Lanche tarde</td>
-                <td>Demo Lanche tarde</td>
-                <td>Demo Lanche tarde</td>
-                <td>Demo Lanche tarde</td>
-                <td>Demo Lanche tarde</td>
-                <td>Demo Lanche tarde</td>
-                <td>Demo Lanche tarde</td>
-            </tr>
-            <tr>
-                <td class="headertable center "><h1>🐟</h1>Jantar</td>
-                <td>Demo Jantar</td>
-                <td>Demo Jantar</td>
-                <td>Demo Jantar</td>
-                <td>Demo Jantar</td>
-                <td>Demo Jantar</td>
-                <td>Demo Jantar</td>
-                <td>Demo Jantar</td>
-            </tr>
-            <tr>
-                <td>Total Dia</td>
-                <td>@rnd.Next(1,1000)  Kca</td>
-                <td>@rnd.Next(1,1000)  Kca</td>
-                <td>@rnd.Next(1,1000)  Kca</td>
-                <td>@rnd.Next(1,1000)  Kca</td>
-                <td>@rnd.Next(1,1000)  Kca</td>
-                <td>@rnd.Next(1,1000)  Kca</td>
-                <td>@rnd.Next(1,1000)  Kca</td>
-            </tr>
-            <tr>
-                <td>NutriScore</td>
-                <td>💚 A</td>
-                <td>💛B</td>
-                <td>🧡C</td>
-                <td>❤️D</td>
-                <td>💚 A</td>
-                <td>💛B</td>
-                <td>🧡C</td>
-            </tr>
-        </tbody>
+        @foreach (var item in Model.ElementOfScheduler)
+        {
+            <tbody>
+                <tr>
+                    <td>-</td>
+                    <td class="headertable">Domingo</td>
+                    <td class="headertable">Segunda</td>
+                    <td class="headertable">Terça</td>
+                    <td class="headertable">Quarta</td>
+                    <td class="headertable">Quinta</td>
+                    <td class="headertable">Sexta</td>
+                    <td class="headertable">Sábado</td>
+
+                </tr>
+
+                @switch (item.MealType)
+                {
+                    case MealType.PeqAlmoco:
+
+                        <tr>
+                            <td class="headertable center"><h1>☕️</h1>Peq Almoco</td>
+
+                            @switch (item.DayOfWeek)
+                            {
+                                case DayOfWeek.Sunday:
+
+                                    <td class="center">@item.NomeReceita</td>
+                                    break;
+
+                                case DayOfWeek.Monday:
+
+                                    <td class="center">@item.NomeReceita</td>
+                                    break;
+
+                                case DayOfWeek.Tuesday:
+
+                                    <td class="center">@item.NomeReceita</td>
+                                    break;
+
+                                case DayOfWeek.Wednesday:
+
+                                    <td class="center">@item.NomeReceita</td>
+                                    break;
+
+                                case DayOfWeek.Thursday:
+
+                                    <td class="center">@item.NomeReceita</td>
+                                    break;
+
+                                case DayOfWeek.Friday:
+
+                                    <td class="center">@item.NomeReceita</td>
+                                    break;
+
+                                case DayOfWeek.Saturday:
+
+                                    <td class="center">@item.NomeReceita</td>
+                                    break;
+                            }
+
+
+
+
+                        </tr>
+
+                        break;
+                    case MealType.LancheManha:
+
+                        <tr>
+                            <td class="headertable center"><h1>🍞</h1>Lanche</td>
+                            @switch (item.DayOfWeek)
+                            {
+                                case DayOfWeek.Sunday:
+
+                                    <td class="center">@item.NomeReceita</td>
+                                    break;
+
+                                case DayOfWeek.Monday:
+
+                                    <td class="center">@item.NomeReceita</td>
+                                    break;
+
+                                case DayOfWeek.Tuesday:
+
+                                    <td class="center">@item.NomeReceita</td>
+                                    break;
+
+                                case DayOfWeek.Wednesday:
+
+                                    <td class="center">@item.NomeReceita</td>
+                                    break;
+
+                                case DayOfWeek.Thursday:
+
+                                    <td class="center">@item.NomeReceita</td>
+                                    break;
+
+                                case DayOfWeek.Friday:
+
+                                    <td class="center">@item.NomeReceita</td>
+                                    break;
+
+                                case DayOfWeek.Saturday:
+
+                                    <td class="center">@item.NomeReceita</td>
+                                    break;
+                            }
+                        </tr>
+
+                        break;
+                    case MealType.Almoço:
+
+                        <tr>
+                            <td class="headertable center"> <h1>🥩</h1>Almoço</td>
+                            @switch (item.DayOfWeek)
+                            {
+                                case DayOfWeek.Sunday:
+
+                                    <td class="center">@item.NomeReceita</td>
+                                    break;
+
+                                case DayOfWeek.Monday:
+
+                                    <td class="center">@item.NomeReceita</td>
+                                    break;
+
+                                case DayOfWeek.Tuesday:
+
+                                    <td class="center">@item.NomeReceita</td>
+                                    break;
+
+                                case DayOfWeek.Wednesday:
+
+                                    <td class="center">@item.NomeReceita</td>
+                                    break;
+
+                                case DayOfWeek.Thursday:
+
+                                    <td class="center">@item.NomeReceita</td>
+                                    break;
+
+                                case DayOfWeek.Friday:
+
+                                    <td class="center">@item.NomeReceita</td>
+                                    break;
+
+                                case DayOfWeek.Saturday:
+
+                                    <td class="center">@item.NomeReceita</td>
+                                    break;
+                            }
+                        </tr>
+
+                        break;
+                    case MealType.LancheTarde:
+
+                        <tr>
+                            <td class="headertable center"><h1>🍏</h1>Lanche tarde</td>
+                            @switch (item.DayOfWeek)
+                            {
+                                case DayOfWeek.Sunday:
+
+                                    <td class="center">@item.NomeReceita</td>
+                                    break;
+
+                                case DayOfWeek.Monday:
+
+                                    <td class="center">@item.NomeReceita</td>
+                                    break;
+
+                                case DayOfWeek.Tuesday:
+
+                                    <td class="center">@item.NomeReceita</td>
+                                    break;
+
+                                case DayOfWeek.Wednesday:
+
+                                    <td class="center">@item.NomeReceita</td>
+                                    break;
+
+                                case DayOfWeek.Thursday:
+
+                                    <td class="center">@item.NomeReceita</td>
+                                    break;
+
+                                case DayOfWeek.Friday:
+
+                                    <td class="center">@item.NomeReceita</td>
+                                    break;
+
+                                case DayOfWeek.Saturday:
+
+                                    <td class="center">@item.NomeReceita</td>
+                                    break;
+                            }
+                        </tr>
+
+
+                        break;
+                    case MealType.Jantar:
+
+                        <tr>
+                            <td class="headertable center "><h1>🐟</h1>Jantar</td>
+                            @switch (item.DayOfWeek)
+                            {
+                                case DayOfWeek.Sunday:
+
+                                    <td class="center">@item.NomeReceita</td>
+                                    break;
+
+                                case DayOfWeek.Monday:
+
+                                    <td class="center">@item.NomeReceita</td>
+                                    break;
+
+                                case DayOfWeek.Tuesday:
+
+                                    <td class="center">@item.NomeReceita</td>
+                                    break;
+
+                                case DayOfWeek.Wednesday:
+
+                                    <td class="center">@item.NomeReceita</td>
+                                    break;
+
+                                case DayOfWeek.Thursday:
+
+                                    <td class="center">@item.NomeReceita</td>
+                                    break;
+
+                                case DayOfWeek.Friday:
+
+                                    <td class="center">@item.NomeReceita</td>
+                                    break;
+
+                                case DayOfWeek.Saturday:
+
+                                    <td>@item.NomeReceita</td>
+                                    break;
+                            }
+                        </tr>
+
+                        break;
+                    case MealType.Outro:
+                        break;
+                    default:
+                        break;
+              
+
+
+
+
+
+
+
+
+
+                <tr>
+                    <td>Total Dia</td>
+                    <td>@rnd.Next(1,1000)  Kca</td>
+                    <td>@rnd.Next(1,1000)  Kca</td>
+                    <td>@rnd.Next(1,1000)  Kca</td>
+                    <td>@rnd.Next(1,1000)  Kca</td>
+                    <td>@rnd.Next(1,1000)  Kca</td>
+                    <td>@rnd.Next(1,1000)  Kca</td>
+                    <td>@rnd.Next(1,1000)  Kca</td>
+                </tr>
+                <tr>
+                    <td>NutriScore</td>
+                    <td>💚 A</td>
+                    <td>💛B</td>
+                    <td>🧡C</td>
+                    <td>❤️D</td>
+                    <td>💚 A</td>
+                    <td>💛B</td>
+                    <td>🧡C</td>
+                </tr>
+
+                }
+            </tbody>
+        }
+
     </table>
 
 
- 
+
 
 }
 <style>
 
-    .center{
-        text-align:center
+    .center {
+        text-align: center
     }
 
 </style>
 
 <script>
 
- 
+
     var btnNovoPlano = document.getElementById("btnNovoPlano");
 
     btnNovoPlano.addEventListener('click', function () {

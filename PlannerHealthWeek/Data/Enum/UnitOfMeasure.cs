@@ -9,14 +9,16 @@ namespace PlannerHealthWeek.Data.Enum
 {
     public enum UnitOfMeasure
     {
-        Gram,
-        Kilogram,
-        Milliliter,
-        Liter,
-        Teaspoon,
-        Tablespoon,
-        Cup,
-        Other
+        g= 0,
+        kg=1,
+        ml=2,
+        l=3,
+        ColherCha=4,
+        ColherSopa=5,
+        Copo=6,
+        Quantidade=7,
+        Outro=8,
+
     }
 
 }

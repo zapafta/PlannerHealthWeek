@@ -12,7 +12,16 @@ namespace PlannerHealthWeek.Data.Model
 
         public UnitOfMeasure UnitOfMeasure { get; set; }
 
+        public double Qty { get; set; }
+
+
         [Required]
         public Ingrediente Ingrediente { get; set; }
+       
+        [Required]
+        [ForeignKey("Receita")]
+        public Guid IdReceita { get; set; }
+        public  Receita Receita { get; set; }
+
     }
 }

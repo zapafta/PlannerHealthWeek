@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PlannerHealthWeek.Data;
+using PlannerHealthWeek.Data.Model;
+using PlannerHealthWeek.Data.Repository;
 using System.IO;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,10 +13,15 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddProgressiveWebApp();
+
+builder.Services.AddTransient<GenericRepository<TipoPlano>>();
+builder.Services.AddTransient<GenericRepository<TipoDieta>>();
+builder.Services.AddTransient<GenericRepository<PlanoAlimentacao>>();
+
 
 if (Directory.Exists(Path.Combine(Directory.GetCurrentDirectory(), @"node_modules", @"@syncfusion")))
 {

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PlannerHealthWeek.Data;
 
@@ -11,9 +12,11 @@ using PlannerHealthWeek.Data;
 namespace PlannerHealthWeek.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230527130131_addUserToMealPlan")]
+    partial class addUserToMealPlan
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -72,6 +75,79 @@ namespace PlannerHealthWeek.Data.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetRoleClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -159,71 +235,6 @@ namespace PlannerHealthWeek.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("PlannerHealthWeek.Data.Model.ApplicationUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers", (string)null);
-                });
-
             modelBuilder.Entity("PlannerHealthWeek.Data.Model.Ingrediente", b =>
                 {
                     b.Property<Guid>("Id")
@@ -239,37 +250,10 @@ namespace PlannerHealthWeek.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Ingrediente");
+                    b.ToTable("Ingredient");
                 });
 
-            modelBuilder.Entity("PlannerHealthWeek.Data.Model.ItemPlanoAlimentacao", b =>
-                {
-                    b.Property<Guid>("MealPlanItemId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("IdPlanoAlimentacao")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MealType")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("ReceitaId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("MealPlanItemId");
-
-                    b.HasIndex("IdPlanoAlimentacao");
-
-                    b.HasIndex("ReceitaId");
-
-                    b.ToTable("ItemPlanoAlimentacao");
-                });
-
-            modelBuilder.Entity("PlannerHealthWeek.Data.Model.PlanoAlimentacao", b =>
+            modelBuilder.Entity("PlannerHealthWeek.Data.Model.MealPlan", b =>
                 {
                     b.Property<int>("IdPlanoAlimentacao")
                         .ValueGeneratedOnAdd()
@@ -281,7 +265,8 @@ namespace PlannerHealthWeek.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("EndDate")
+                    b.Property<DateTime?>("EndDate")
+                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("StartDate")
@@ -295,7 +280,34 @@ namespace PlannerHealthWeek.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("PlanoAlimentacao");
+                    b.ToTable("MealPlan");
+                });
+
+            modelBuilder.Entity("PlannerHealthWeek.Data.Model.MealPlanItem", b =>
+                {
+                    b.Property<Guid>("MealPlanItemId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("MealPlanIdPlanoAlimentacao")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MealType")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("ReceitaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("MealPlanItemId");
+
+                    b.HasIndex("MealPlanIdPlanoAlimentacao");
+
+                    b.HasIndex("ReceitaId");
+
+                    b.ToTable("MealPlanItem");
                 });
 
             modelBuilder.Entity("PlannerHealthWeek.Data.Model.Receita", b =>
@@ -318,7 +330,7 @@ namespace PlannerHealthWeek.Data.Migrations
 
                     b.HasKey("ReceitaId");
 
-                    b.ToTable("Receita");
+                    b.ToTable("Recipe");
                 });
 
             modelBuilder.Entity("PlannerHealthWeek.Data.Model.ReceitaItem", b =>
@@ -327,23 +339,20 @@ namespace PlannerHealthWeek.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("IdReceita")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("IngredienteId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<double>("Qty")
-                        .HasColumnType("float");
+                    b.Property<Guid?>("ReceitaId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("UnitOfMeasure")
                         .HasColumnType("int");
 
                     b.HasKey("ReceitaItemId");
 
-                    b.HasIndex("IdReceita");
-
                     b.HasIndex("IngredienteId");
+
+                    b.HasIndex("ReceitaId");
 
                     b.ToTable("ReceitaItem");
                 });
@@ -378,6 +387,13 @@ namespace PlannerHealthWeek.Data.Migrations
                     b.ToTable("TipoPlano");
                 });
 
+            modelBuilder.Entity("PlannerHealthWeek.Data.Model.ApplicationUser", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.HasDiscriminator().HasValue("ApplicationUser");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -389,7 +405,7 @@ namespace PlannerHealthWeek.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("PlannerHealthWeek.Data.Model.ApplicationUser", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -398,7 +414,7 @@ namespace PlannerHealthWeek.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("PlannerHealthWeek.Data.Model.ApplicationUser", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -413,7 +429,7 @@ namespace PlannerHealthWeek.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PlannerHealthWeek.Data.Model.ApplicationUser", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -422,33 +438,14 @@ namespace PlannerHealthWeek.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("PlannerHealthWeek.Data.Model.ApplicationUser", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("PlannerHealthWeek.Data.Model.ItemPlanoAlimentacao", b =>
-                {
-                    b.HasOne("PlannerHealthWeek.Data.Model.PlanoAlimentacao", "PlanoAlimentacao")
-                        .WithMany("ItemPlanoAlimentacao")
-                        .HasForeignKey("IdPlanoAlimentacao")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PlannerHealthWeek.Data.Model.Receita", "Receita")
-                        .WithMany()
-                        .HasForeignKey("ReceitaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("PlanoAlimentacao");
-
-                    b.Navigation("Receita");
-                });
-
-            modelBuilder.Entity("PlannerHealthWeek.Data.Model.PlanoAlimentacao", b =>
+            modelBuilder.Entity("PlannerHealthWeek.Data.Model.MealPlan", b =>
                 {
                     b.HasOne("PlannerHealthWeek.Data.Model.ApplicationUser", "User")
                         .WithMany()
@@ -459,28 +456,39 @@ namespace PlannerHealthWeek.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("PlannerHealthWeek.Data.Model.ReceitaItem", b =>
+            modelBuilder.Entity("PlannerHealthWeek.Data.Model.MealPlanItem", b =>
                 {
+                    b.HasOne("PlannerHealthWeek.Data.Model.MealPlan", null)
+                        .WithMany("MealPlanItems")
+                        .HasForeignKey("MealPlanIdPlanoAlimentacao");
+
                     b.HasOne("PlannerHealthWeek.Data.Model.Receita", "Receita")
-                        .WithMany("ListReceitaItem")
-                        .HasForeignKey("IdReceita")
+                        .WithMany()
+                        .HasForeignKey("ReceitaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Receita");
+                });
+
+            modelBuilder.Entity("PlannerHealthWeek.Data.Model.ReceitaItem", b =>
+                {
                     b.HasOne("PlannerHealthWeek.Data.Model.Ingrediente", "Ingrediente")
                         .WithMany()
                         .HasForeignKey("IngredienteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Ingrediente");
+                    b.HasOne("PlannerHealthWeek.Data.Model.Receita", null)
+                        .WithMany("ListReceitaItem")
+                        .HasForeignKey("ReceitaId");
 
-                    b.Navigation("Receita");
+                    b.Navigation("Ingrediente");
                 });
 
-            modelBuilder.Entity("PlannerHealthWeek.Data.Model.PlanoAlimentacao", b =>
+            modelBuilder.Entity("PlannerHealthWeek.Data.Model.MealPlan", b =>
                 {
-                    b.Navigation("ItemPlanoAlimentacao");
+                    b.Navigation("MealPlanItems");
                 });
 
             modelBuilder.Entity("PlannerHealthWeek.Data.Model.Receita", b =>

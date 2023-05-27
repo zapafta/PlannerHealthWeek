@@ -1,14 +1,14 @@
-﻿
-
+﻿@using PlannerHealthWeek.ModelViewModel;
+@model HomeViewModel
 
 
 <ejs-dialog id="DilaogNewPlan" created="createdDilaogNewPlan"  width="550px" showCloseIcon="true" >
     <e-content-template>
-        <ejs-dropdownlist id="ddTipoPlano" placeholder="Escolha o tipo de plano" dataSource="@ViewBag.TipoPlano"  index="2" popupHeight="220px">
+        <ejs-dropdownlist id="ddTipoPlano" placeholder="Escolha o tipo de plano" dataSource="@Model.TipoPlanos"  index="2" popupHeight="220px">
             <e-dropdownlist-fields text="Descricao" value="Id"></e-dropdownlist-fields>
         </ejs-dropdownlist>
 
-        <ejs-dropdownlist id="ddTipoDieta" placeholder="Escolha o tipo de dieta" dataSource="@ViewBag.TipoDieta" index="2" popupHeight="220px">
+        <ejs-dropdownlist id="ddTipoDieta" placeholder="Escolha o tipo de dieta" dataSource="@Model.TipoDieta" index="2" popupHeight="220px">
             <e-dropdownlist-fields text="Descricao" value="Id"></e-dropdownlist-fields>
         </ejs-dropdownlist>
 

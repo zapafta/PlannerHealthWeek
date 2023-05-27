@@ -14,6 +14,10 @@ namespace PlannerHealthWeek.Data.Enum
         Fruta=4,
         Lacticinio=5,
         Grão=6,
-        Outro=7
+
+        Outro=7,
+        Proteina=8,
+        Especiaria=9,
+
     }
 }

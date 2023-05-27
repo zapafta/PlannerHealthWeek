@@ -21,7 +21,7 @@ namespace PlannerHealthWeek.Data.Model
 
         public IngredientCategory Category { get; set; }
 
-      
+        public double Kcal { get; set; }
 
 
     }

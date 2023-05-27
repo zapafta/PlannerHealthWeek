@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PlannerHealthWeek.Data.Model
 {
-    public class MealPlanItem
+    public class ItemPlanoAlimentacao
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -20,5 +20,10 @@ namespace PlannerHealthWeek.Data.Model
         public Receita Receita { get; set; }
         [Required]
         public DateTime Date { get; set; }
+
+        [Required]
+        [ForeignKey("PlanoAlimentacao")]
+        public int IdPlanoAlimentacao { get; set; }
+        public PlanoAlimentacao PlanoAlimentacao { get; set; }
     }
 }
