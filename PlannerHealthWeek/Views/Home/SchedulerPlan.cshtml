@@ -1,0 +1,138 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Random rnd = new Random();
+
+}
+
+@{
+    
+    
+
+    <ejs-button id="btnNovoPlano" content="➕ Criar novo plano"></ejs-button>
+    <ejs-button id="btnGenerateList" content="🛒 Gerar Lista de compras" ></ejs-button>
+    <ejs-button id="btnImprimir" content="📄 Imprimir" ></ejs-button>
+
+    <ejs-daterangepicker width="300" id="daterangepickerFor" name="value" startDate="@DateTime.Now" endDate="DateTime.Now.AddDays(7)"></ejs-daterangepicker>
+
+    <table style="width: 100%;" border="4">
+        <tbody>
+            <tr>
+                <td>-</td>
+                <td class="headertable">Domingo</td>
+                <td class="headertable">Segunda</td>
+                <td class="headertable">Terça</td>
+                <td class="headertable">Quarta</td>
+                <td class="headertable">Quinta</td>
+                <td class="headertable">Sexta</td>
+                <td class="headertable">Sábado</td>
+
+            </tr>
+            <tr>
+                    <td class="headertable center"><h1>☕️</h1>Peq Almoco</td>
+                <td>DEMOS</td>
+                <td>DEMOS</td>
+                <td>DEMOS</td>
+                <td>DEMOS</td>
+                <td>DEMOS</td>
+                <td>DEMOS</td>
+                <td>DEMOS</td>
+            </tr>
+            <tr>
+                <td class="headertable center"><h1>🍞</h1>Lanche</td>
+                <td>DEMO LANCHE</td>
+                <td>DEMO LANCHE</td>
+                <td>DEMO LANCHE</td>
+                <td>DEMO LANCHE</td>
+                <td>DEMO LANCHE</td>
+                <td>DEMO LANCHE</td>
+                <td>DEMO LANCHE</td>
+            </tr>
+            <tr>
+                <td class="headertable center"> <h1>🥩</h1>Almoço</td>
+                <td>DEMO ALMOCO</td>
+                <td>DEMO ALMOCO</td>
+                <td>DEMO ALMOCO</td>
+                <td>DEMO ALMOCO</td>
+                <td>DEMO ALMOCO</td>
+                <td>DEMO ALMOCO</td>
+                <td>DEMO ALMOCO</td>
+            </tr>
+            <tr>
+                <td class="headertable center"><h1>🍏</h1>Lanche tarde</td>
+                <td>Demo Lanche tarde</td>
+                <td>Demo Lanche tarde</td>
+                <td>Demo Lanche tarde</td>
+                <td>Demo Lanche tarde</td>
+                <td>Demo Lanche tarde</td>
+                <td>Demo Lanche tarde</td>
+                <td>Demo Lanche tarde</td>
+            </tr>
+            <tr>
+                <td class="headertable center "><h1>🐟</h1>Jantar</td>
+                <td>Demo Jantar</td>
+                <td>Demo Jantar</td>
+                <td>Demo Jantar</td>
+                <td>Demo Jantar</td>
+                <td>Demo Jantar</td>
+                <td>Demo Jantar</td>
+                <td>Demo Jantar</td>
+            </tr>
+            <tr>
+                <td>Total Dia</td>
+                <td>@rnd.Next(1,1000)  Kca</td>
+                <td>@rnd.Next(1,1000)  Kca</td>
+                <td>@rnd.Next(1,1000)  Kca</td>
+                <td>@rnd.Next(1,1000)  Kca</td>
+                <td>@rnd.Next(1,1000)  Kca</td>
+                <td>@rnd.Next(1,1000)  Kca</td>
+                <td>@rnd.Next(1,1000)  Kca</td>
+            </tr>
+            <tr>
+                <td>NutriScore</td>
+                <td>💚 A</td>
+                <td>💛B</td>
+                <td>🧡C</td>
+                <td>❤️D</td>
+                <td>💚 A</td>
+                <td>💛B</td>
+                <td>🧡C</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+ 
+
+}
+<style>
+
+    .center{
+        text-align:center
+    }
+
+</style>
+
+<script>
+
+ 
+    var btnNovoPlano = document.getElementById("btnNovoPlano");
+
+    btnNovoPlano.addEventListener('click', function () {
+
+
+        var DilaogNewPlan = document.getElementById("DilaogNewPlan").ej2_instances[0];
+        DilaogNewPlan.show();
+    });
+
+
+
+
+
+
+
+
+
+</script>
+

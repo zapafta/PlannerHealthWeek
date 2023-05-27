@@ -1,0 +1,89 @@
+﻿
+
+
+
+<ejs-dialog id="DilaogNewPlan" created="createdDilaogNewPlan"  width="550px" showCloseIcon="true" >
+    <e-content-template>
+        <ejs-dropdownlist id="ddTipoPlano" placeholder="Escolha o tipo de plano" dataSource="@ViewBag.TipoPlano"  index="2" popupHeight="220px">
+            <e-dropdownlist-fields text="Descricao" value="Id"></e-dropdownlist-fields>
+        </ejs-dropdownlist>
+
+        <ejs-dropdownlist id="ddTipoDieta" placeholder="Escolha o tipo de dieta" dataSource="@ViewBag.TipoDieta" index="2" popupHeight="220px">
+            <e-dropdownlist-fields text="Descricao" value="Id"></e-dropdownlist-fields>
+        </ejs-dropdownlist>
+
+
+        <ejs-button id="GenerateReceita" content="🔥 Gerar receita semanal"></ejs-button>
+
+
+    </e-content-template>
+    <e-dialog-buttons>
+        <e-dialog-dialogbutton ></e-dialog-dialogbutton>
+    </e-dialog-buttons>
+</ejs-dialog>
+
+
+
+
+
+<script>
+
+    function createdDilaogNewPlan()
+
+    {
+        var DilaogNewPlan = document.getElementById("DilaogNewPlan").ej2_instances[0];
+        DilaogNewPlan.hide();
+    }
+
+
+    function GerarReceita() {
+
+        var ddTipoPlano = document.getElementById("ddTipoPlano").ej2_instances[0].value;
+        var ddTipoDieta = document.getElementById("ddTipoDieta").ej2_instances[0].value;
+
+        $.ajax({
+            type: 'POST',
+            url: '/Home/GerarReceita',
+            async: true,
+            type: 'POST',
+            dataType: 'json',
+            data:
+            {
+                'IdTipoPlano': ddTipoPlano,
+                'IdTipoDieta': ddTipoDieta
+            },
+            success: function (data) {
+
+                if (data.error == true) {
+                    var toastObj = document.getElementById('elementerro').ej2_instances[0];
+                    toastObj.position.X = 'Right'; toastObj.position.Y = 'Top';
+                    toastObj.target = document.body;
+                    toastObj.content = data.message;
+                    toastObj.show();
+                } else {
+                    var toastObj = document.getElementById('elementSucesso').ej2_instances[0];
+                    toastObj.position.X = 'Right'; toastObj.position.Y = 'Top';
+                    toastObj.target = document.body;
+                    toastObj.content = data.message;
+                    toastObj.show();
+                }
+
+
+
+            }
+
+        });
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+</script>

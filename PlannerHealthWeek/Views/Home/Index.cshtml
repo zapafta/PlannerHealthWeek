@@ -1,12 +1,34 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
-}
+   
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+}
+<style>
+
+
+    .headertable{
+
+        font-weight:bold;
+        color:black
+    }
+
+</style>
+
 
 <div>
-    <ejs-calendar id="calendar"></ejs-calendar>
+
+
+    @if (this.User.Identity.IsAuthenticated)
+    {
+
+    @await Html.PartialAsync("DialogNewPlan")
+
+    @await Html.PartialAsync("SchedulerPlan")
+    }else{
+
+       <p>Hello there</p>
+
+    }
+
+    <!-- DivTable.com -->
 </div>

@@ -20,6 +20,7 @@
     <Folder Include="Data\Enum\" />
     <Folder Include="Data\Model\" />
     <Folder Include="Data\Repository\" />
+    <Folder Include="ModelViewModel\" />
   </ItemGroup>
 
 </Project>
