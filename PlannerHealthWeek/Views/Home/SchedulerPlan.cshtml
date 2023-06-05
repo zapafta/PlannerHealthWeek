@@ -17,6 +17,7 @@
 
     <ejs-daterangepicker width="300" id="daterangepickerFor" name="value" startDate="@DateTime.Now" endDate="DateTime.Now.AddDays(7)"></ejs-daterangepicker>
     <table style="width: 100%;" border="4">
+ 
 
         @foreach (var item in Model.ElementOfScheduler)
         {
@@ -298,6 +299,12 @@
 
                 }
             </tbody>
+        }
+
+        @if (Model.ElementOfScheduler.Count==0)
+        {
+
+            <h3>Nesta semana nao tens qualquer plano criado 😕</h3>
         }
 
     </table>

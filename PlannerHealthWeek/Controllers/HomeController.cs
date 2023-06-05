@@ -63,5 +63,54 @@ namespace PlannerHealthWeek.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+
+        public IActionResult GerarReceita (Guid IdTipoPlano, Guid IdTipoDieta)
+        {
+           
+            PlanoAlimentacao planoAlimentacao = new PlanoAlimentacao();
+
+            planoAlimentacao.StartDate= DateTime.Now;
+            planoAlimentacao.EndDate= DateTime.Now;
+            //planoAlimentacao.User = "" associate user logged;
+            planoAlimentacao.Descricao = "concatenação dos tipos de plano data e user talvez";
+            //Todo, genereate items plano de alimentacao
+            //Based on tipo de dieta e tipo de plano
+            //
+            _genericRepositoryPlano.Insert(planoAlimentacao);
+            
+
+            return BadRequest();
+        }
+
+        public IActionResult Gerarcompras(Guid idPlano)
+        {
+
+
+            //Gerar compras baseado nos planos acima mencionados,
+            //Ovos mexidos
+            //3 ovos, 3 kg sal, 1 folha de oregaos
+            //Criar checklist com todas essas compras
+            //PeqAlmoco
+             // - 3 ovos, 3 kg sal, 1 folha oregaos,
+             //Ordenar a receita de compras pela area do supermercado (tudo na leitaria, tudo no talho etc)
+
+            PlanoAlimentacao planoAlimentacao = new PlanoAlimentacao();
+
+            planoAlimentacao.StartDate = DateTime.Now;
+            planoAlimentacao.EndDate = DateTime.Now;
+            //planoAlimentacao.User = "" associate user logged;
+            planoAlimentacao.Descricao = "concatenação dos tipos de plano data e user talvez";
+            //Todo, genereate items plano de alimentacao
+            //Based on tipo de dieta e tipo de plano
+            //
+            _genericRepositoryPlano.Insert(planoAlimentacao);
+
+
+            return BadRequest();
+        }
+
+
+
     }
 }

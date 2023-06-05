@@ -36,16 +36,21 @@ namespace PlannerHealthWeek.Data.Repository
 
                         var user = context.Users.FirstOrDefault(e => e.Email == UserLogged);
 
-            int PlanoAlimentacao = context.PlanoAlimentacao.FirstOrDefault(e => e.UserId == user.Id).IdPlanoAlimentacao;
+            var ObjPlanoAlimentacao = context.PlanoAlimentacao.FirstOrDefault(e => e.UserId == user.Id
+            && (e.StartDate >= Start && e.EndDate < End)
+            );
 
+               int intPlanoAlimentacao = 0;
 
-
-
+              if(  ObjPlanoAlimentacao!=null)
+            {
+                intPlanoAlimentacao = ObjPlanoAlimentacao.IdPlanoAlimentacao;
+            }
 
 
             var GuidsTemp = context.ItemPlanoAlimentacao
                 .Include(e => e.Receita).ThenInclude(e => e.ListReceitaItem)
-                .Where(e => e.PlanoAlimentacao.IdPlanoAlimentacao == PlanoAlimentacao)
+                .Where(e => e.PlanoAlimentacao.IdPlanoAlimentacao == intPlanoAlimentacao)
                 .Select(e => new ElementOfScheduler
                 {
                     MealType = e.MealType,

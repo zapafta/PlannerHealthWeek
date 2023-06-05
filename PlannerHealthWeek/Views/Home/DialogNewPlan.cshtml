@@ -36,6 +36,14 @@
     }
 
 
+    var BtnGenerateReceita = document.getElementById("GenerateReceita");
+
+    BtnGenerateReceita.addEventListener('click', function () {
+        GerarReceita();
+    });
+
+
+
     function GerarReceita() {
 
         var ddTipoPlano = document.getElementById("ddTipoPlano").ej2_instances[0].value;
